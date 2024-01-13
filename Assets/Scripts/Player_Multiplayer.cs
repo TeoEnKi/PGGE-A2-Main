@@ -201,12 +201,15 @@ public class Player_Multiplayer : MonoBehaviour
 
     public void FireBullet()
     {
-        if (mBulletPrefab == null) return;
-
+        if (mBulletPrefab == null)
+        {
+            Debug.LogWarning("not fired");
+            return;
+        };
         Vector3 dir = -mGunTransform.right.normalized;
         Vector3 firePoint = mGunTransform.transform.position + dir *
             1.2f - mGunTransform.forward * 0.1f;
-        GameObject bullet = Instantiate(mBulletPrefab, firePoint,
+        GameObject bullet = PhotonNetwork.Instantiate(mBulletPrefab.name, firePoint,
             Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
 
         bullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);

@@ -955,7 +955,7 @@ MonoBehaviour:
     m_Bits: 256
   mCanvas: {fileID: 2028064569042939165}
   mCrossHair: {fileID: 2028064569042939166}
-  mBulletPrefab: {fileID: 1794198430189847228, guid: d8d3ec337bac0704cbfca3cb3fdcb904, type: 3}
+  mBulletPrefab: {fileID: 1632410478391250043, guid: d8d3ec337bac0704cbfca3cb3fdcb904, type: 3}
   mBulletSpeed: 10
   RoundsPerSecond: 0a0000000800000002000000
 --- !u!1 &2225438476787432580

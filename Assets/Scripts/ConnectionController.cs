@@ -20,6 +20,8 @@ namespace PGGE
 
             bool isConnecting = false;
 
+            AudioManager audioManager;
+
             void Awake()
             {
                 // this makes sure we can use PhotonNetwork.LoadLevel() on 
@@ -33,10 +35,13 @@ namespace PGGE
             void Start()
             {
                 mConnectionProgress.SetActive(false);
+                audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
             }
 
             public void Connect()
             {
+                audioManager.PlayEnterBtnSound();
+
                 mBtnJoinRoom.SetActive(false);
                 mInpPlayerName.SetActive(false);
                 mConnectionProgress.SetActive(true);

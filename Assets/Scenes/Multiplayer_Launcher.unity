@@ -155,6 +155,7 @@ MonoBehaviour:
   maxPlayersPerRoom: 4
   mConnectionProgress: {fileID: 1904367824}
   mBtnJoinRoom: {fileID: 326169118}
+  mBtnBack: {fileID: 743602369}
   mInpPlayerName: {fileID: 421955836}
 --- !u!4 &117140713
 Transform:

@@ -16,6 +16,7 @@ namespace PGGE
 
             public GameObject mConnectionProgress;
             public GameObject mBtnJoinRoom;
+            public GameObject mBtnBack;
             public GameObject mInpPlayerName;
 
             bool isConnecting = false;
@@ -43,6 +44,7 @@ namespace PGGE
                 audioManager.PlayEnterBtnSound();
 
                 mBtnJoinRoom.SetActive(false);
+                mBtnBack.SetActive(false);
                 mInpPlayerName.SetActive(false);
                 mConnectionProgress.SetActive(true);
 

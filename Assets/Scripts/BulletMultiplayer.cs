@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class BulletMultiplayer : MonoBehaviourPun
 {
-    void Start()
+    //disable bullet after a few seconds
+    void OnEnable()
     {
         // Destroy the bullet after 10 seconds if it does not hit any object.
-        StartCoroutine(Coroutine_Destroy(10.0f));
+        StartCoroutine(Coroutine_Disable(10.0f));
     }
 
     void Update()
     {
     }
 
-    IEnumerator Coroutine_Destroy(float duration)
+    IEnumerator Coroutine_Disable(float duration)
     {
         yield return new WaitForSeconds(duration);
-        this.GetComponent<PhotonView>().RPC("Destroy", RpcTarget.AllBuffered);
+        this.GetComponent<PhotonView>().RPC("DisableBullet", RpcTarget.AllBuffered);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,11 +30,12 @@ public class BulletMultiplayer : MonoBehaviourPun
             obj.TakeDamage();
         }
 
-        StartCoroutine(Coroutine_Destroy(0.1f));
+        StartCoroutine(Coroutine_Disable(0.1f));
     }
+
     [PunRPC]
-    public void Destroy()
+    public void DisableBullet()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

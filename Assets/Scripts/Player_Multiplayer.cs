@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using PGGE.Patterns;
 using Photon.Pun;
+using System;
+using Photon.Realtime;
 
 public class Player_Multiplayer : MonoBehaviour
 {
@@ -34,7 +36,7 @@ public class Player_Multiplayer : MonoBehaviour
     public Canvas mCanvas;
     public RectTransform mCrossHair;
 
-    public GameObject mBulletPrefab;
+    //public GameObject mBulletPrefab;
     public ObjectPoolBullet objectPoolBullet;
     public float mBulletSpeed = 10.0f;
 
@@ -201,7 +203,8 @@ public class Player_Multiplayer : MonoBehaviour
 
     public void FireBullet()
     {
-        if (mBulletPrefab == null)
+        GameObject usedBullet = objectPoolBullet.GetUnusedBullet();
+        if (usedBullet == null)
         {
             Debug.LogWarning("not fired");
             return;
@@ -209,12 +212,41 @@ public class Player_Multiplayer : MonoBehaviour
         Vector3 dir = -mGunTransform.right.normalized;
         Vector3 firePoint = mGunTransform.transform.position + dir *
             1.2f - mGunTransform.forward * 0.1f;
-        GameObject bullet = PhotonNetwork.Instantiate(mBulletPrefab.name, firePoint,
-            Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
 
-        bullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
+        PhotonView photonView = usedBullet.transform.GetComponent<PhotonView>();
+
+        //set the bulet pos to the spawn pos
+        object[] setToSpawnParams = {usedBullet ,firePoint };
+        photonView.RPC("SetToSpawnPos", RpcTarget.AllBuffered, setToSpawnParams);
+        //bullet now visible to everyone
+        photonView.RPC("EnableBulletVisibility", RpcTarget.AllBuffered,usedBullet);
+        //apply force to bullet
+        object[] applyForceParams = { usedBullet, dir };
+        photonView.RPC("ApplyForce", RpcTarget.AllBuffered, applyForceParams);
+
+
+
+        //GameObject bullet = PhotonNetwork.Instantiate(mBulletPrefab.name, firePoint,
+        //    Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
+
+        //usedBullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
     }
 
+    [PunRPC]
+    private void EnableBulletVisibility(GameObject bullet)
+    {
+        bullet.SetActive(true);
+    }
+    [PunRPC]
+    void SetToSpawnPos(GameObject bullet, Vector3 spawnPos)
+    {
+        bullet.transform.position = spawnPos;
+    }
+    [PunRPC]
+    void ApplyForce(GameObject bullet, Vector3 dir)
+    {
+        bullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
+    }
     IEnumerator Coroutine_Firing(int id)
     {
         mFiring[id] = true;

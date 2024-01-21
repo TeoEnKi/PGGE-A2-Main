@@ -1024,6 +1024,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 288803560087075850, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 688976050169325915, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1056,13 +1060,25 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5370492876037077658, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6801966289879701910, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: viewIdField
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7310864242718787785, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7443943079139736039, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_Name
       value: Bullet_Networked
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443943079139736039, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7474352918603793060, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_RootOrder
@@ -1124,9 +1140,13 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8715314319072384982, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8893975613923036493, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_Name
-      value: pre-initialised bullets
+      value: Pre-initialised bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

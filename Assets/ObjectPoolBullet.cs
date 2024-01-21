@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObjectPoolBullet : MonoBehaviour
 {
-    public List<GameObject> photonListBullets = new List<GameObject>();
+    [HideInInspector] public List<GameObject> photonListBullets = new List<GameObject>();
     [SerializeField] private GameObject bulletPrefab;
 
     private void Start()
@@ -14,7 +14,7 @@ public class ObjectPoolBullet : MonoBehaviour
     }
 
     //gets first bullet that is inactive
-    public GameObject GetInactivePooledObject()
+    public GameObject GetUnusedBullet()
     {
         foreach(GameObject bullet in photonListBullets)
         {

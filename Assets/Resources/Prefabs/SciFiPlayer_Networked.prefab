@@ -957,6 +957,7 @@ MonoBehaviour:
   mCanvas: {fileID: 2028064569042939165}
   mCrossHair: {fileID: 2028064569042939166}
   mBulletPrefab: {fileID: 6484067606254435558, guid: 3c1fca116678e1a42aa530bfab8a826c, type: 3}
+  objectPoolBullet: {fileID: 5840627317201339297}
   mBulletSpeed: 10
   RoundsPerSecond: 0a0000000800000002000000
 --- !u!1 &2225438476787432580
@@ -3093,6 +3094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7286516850414415255}
+  - component: {fileID: 5840627317201339297}
   m_Layer: 8
   m_Name: Magazine
   m_TagString: Untagged
@@ -3120,6 +3122,20 @@ Transform:
   m_Father: {fileID: 7474352918603793060}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5840627317201339297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893975613923036493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e20fff6f7ff764e80f7dd93ab879ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonListBullets: []
+  bulletPrefab: {fileID: 6484067606254435558, guid: 3c1fca116678e1a42aa530bfab8a826c, type: 3}
 --- !u!1 &9000929785580713672
 GameObject:
   m_ObjectHideFlags: 0

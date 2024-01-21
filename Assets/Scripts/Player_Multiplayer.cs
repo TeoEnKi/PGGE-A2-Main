@@ -34,8 +34,8 @@ public class Player_Multiplayer : MonoBehaviour
     public Canvas mCanvas;
     public RectTransform mCrossHair;
 
-
     public GameObject mBulletPrefab;
+    public ObjectPoolBullet objectPoolBullet;
     public float mBulletSpeed = 10.0f;
 
     public int[] RoundsPerSecond = new int[3];

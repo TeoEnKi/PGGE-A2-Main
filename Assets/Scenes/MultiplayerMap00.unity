@@ -1032,6 +1032,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1216160820947918598, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1443914304862336580, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1051,6 +1055,10 @@ PrefabInstance:
     - target: {fileID: 2773380141306829576, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801966289879701910, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: viewIdField
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7443943079139736039, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: m_Name
@@ -1104,9 +1112,21 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7787188501194077402, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185233873590381509, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: viewIdField
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8335195709445462763, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
       propertyPath: viewIdField
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893975613923036493, guid: 3e2ee691d461bd0459ddead86904069e, type: 3}
+      propertyPath: m_Name
+      value: pre-initialised bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,10 +12,6 @@ public class BulletMultiplayer : MonoBehaviourPun
         StartCoroutine(Coroutine_Disable(10.0f));
     }
 
-    void Update()
-    {
-    }
-
     IEnumerator Coroutine_Disable(float duration)
     {
         yield return new WaitForSeconds(duration);

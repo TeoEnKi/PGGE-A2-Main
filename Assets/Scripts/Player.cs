@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using PGGE.Patterns;
+using System.Collections;
 using UnityEngine;
-using PGGE.Patterns;
 
 public class Player : MonoBehaviour
 {
@@ -57,38 +56,56 @@ public class Player : MonoBehaviour
         // Implement the logic of button clicks for shooting. 
         //-----------------------------------------------------------------//
 
-        if (Input.GetButton("Fire1"))
-        {
-            mAttackButtons[0] = true;
-            mAttackButtons[1] = false;
-            mAttackButtons[2] = false;
-        }
-        else
-        {
-            mAttackButtons[0] = false;
-        }
-
-        if (Input.GetButton("Fire2"))
-        {
-            mAttackButtons[0] = false;
-            mAttackButtons[1] = true;
-            mAttackButtons[2] = false;
-        }
-        else
-        {
-            mAttackButtons[1] = false;
-        }
-
+        //like the original code,
+        //ensure that the fire3 btn is prioritised when determining
+        //the final update of the values of the array for which mouse button is clicked
         if (Input.GetButton("Fire3"))
         {
-            mAttackButtons[0] = false;
-            mAttackButtons[1] = false;
-            mAttackButtons[2] = true;
+            HandleFireBtnInput(FiringState.Fire3);
+        }
+        else if (Input.GetButton("Fire2"))
+        {
+            HandleFireBtnInput(FiringState.Fire2);
+        }
+        else if (Input.GetButton("Fire1"))
+        {
+            HandleFireBtnInput(FiringState.Fire1);
         }
         else
         {
-            mAttackButtons[2] = false;
+            HandleFireBtnInput(FiringState.NoFire);
         }
+
+    }
+    //change the values of the attack button array based on the firebutton pressed
+    private void HandleFireBtnInput(FiringState firingState)
+    {
+        mAttackButtons[0] = false;
+        mAttackButtons[1] = false;
+        mAttackButtons[2] = false;
+
+        switch (firingState)
+        {
+            case FiringState.NoFire:
+                break;
+            case FiringState.Fire1:
+                mAttackButtons[0] = true;
+                break;
+            case FiringState.Fire2:
+                mAttackButtons[1] = true;
+                break;
+            case FiringState.Fire3:
+                mAttackButtons[2] = true;
+                break;
+        }
+    }
+
+    private enum FiringState
+    {
+        NoFire,
+        Fire1,
+        Fire2,
+        Fire3
     }
 
     public void Aim()

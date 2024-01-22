@@ -7,7 +7,12 @@ Refactoring
 	c. Changing the FireBullet(): Instead of instantiating game object, set the game object to active
 	d. Changing the destroy gameobject on created, to disabling gameobject
 
-	addon. when the bullet is set to active, put it at the back of the list
+	may addon. when the bullet is set to active, put it at the back of the list
+
+2. Make the code that handles the fire bullet input cleaner
+
+3. 
+
 May do:
 1. Find a big function to break down
 2.abstract class 

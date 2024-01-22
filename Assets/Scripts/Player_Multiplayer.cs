@@ -203,7 +203,6 @@ public class Player_Multiplayer : MonoBehaviour
 
     public void FireBullet()
     {
-
         string usedBulletName = objectPoolBullet.GetUnusedBullet();
         if (usedBulletName == "")
         {
@@ -222,13 +221,6 @@ public class Player_Multiplayer : MonoBehaviour
         //apply force to bullet
         object[] applyForceParams = { usedBulletName, dir };
         mPhotonView.RPC("ApplyForce", RpcTarget.AllBuffered, applyForceParams);
-
-
-
-        //GameObject bullet = PhotonNetwork.Instantiate(mBulletPrefab.name, firePoint,
-        //    Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
-
-        //usedBullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
     }
 
     [PunRPC]

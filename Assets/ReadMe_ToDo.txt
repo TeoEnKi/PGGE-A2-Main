@@ -11,7 +11,10 @@ Refactoring
 
 2. Make the code (in the Player scipt) that handles the fire bullet input cleaner
 
-3. 
+3. Making the Move function in the Player Moement script cleaner
+	a. Put the block of code related to moving player left, right, forward and backwards into a PlayerNavigation function
+	b. Put the block of code related to rotating player into a PlayerRotation function
+	c. use the 2 functions to replace the 2 block of codes from the Move function.
 
 May do:
 1. Find a big function to break down

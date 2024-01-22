@@ -203,8 +203,9 @@ public class Player_Multiplayer : MonoBehaviour
 
     public void FireBullet()
     {
-        GameObject usedBullet = objectPoolBullet.GetUnusedBullet();
-        if (usedBullet == null)
+
+        string usedBulletName = objectPoolBullet.GetUnusedBullet();
+        if (usedBulletName == "")
         {
             Debug.LogWarning("not fired");
             return;
@@ -213,16 +214,14 @@ public class Player_Multiplayer : MonoBehaviour
         Vector3 firePoint = mGunTransform.transform.position + dir *
             1.2f - mGunTransform.forward * 0.1f;
 
-        PhotonView photonView = usedBullet.transform.GetComponent<PhotonView>();
-
-        //set the bulet pos to the spawn pos
-        object[] setToSpawnParams = {usedBullet ,firePoint };
-        photonView.RPC("SetToSpawnPos", RpcTarget.AllBuffered, setToSpawnParams);
         //bullet now visible to everyone
-        photonView.RPC("EnableBulletVisibility", RpcTarget.AllBuffered,usedBullet);
+        mPhotonView.RPC("EnableBulletVisibility", RpcTarget.AllBuffered, usedBulletName);
+        //set the bulet pos to the spawn pos
+        object[] setToSpawnParams = { usedBulletName, firePoint, dir };
+        mPhotonView.RPC("SetToSpawnPos", RpcTarget.AllBuffered, setToSpawnParams);
         //apply force to bullet
-        object[] applyForceParams = { usedBullet, dir };
-        photonView.RPC("ApplyForce", RpcTarget.AllBuffered, applyForceParams);
+        object[] applyForceParams = { usedBulletName, dir };
+        mPhotonView.RPC("ApplyForce", RpcTarget.AllBuffered, applyForceParams);
 
 
 
@@ -233,19 +232,28 @@ public class Player_Multiplayer : MonoBehaviour
     }
 
     [PunRPC]
-    private void EnableBulletVisibility(GameObject bullet)
+    private void EnableBulletVisibility(string bulletName)
     {
-        bullet.SetActive(true);
+        foreach (Transform bullet in objectPoolBullet.photonListBullets)
+        {
+            if(bullet.name == bulletName)
+            {
+                bullet.gameObject.SetActive(true);
+                return;
+            }
+        }
+        Debug.LogWarning("missing bullet" + bulletName);
     }
     [PunRPC]
-    void SetToSpawnPos(GameObject bullet, Vector3 spawnPos)
+    void SetToSpawnPos(string bulletName, Vector3 spawnPos, Vector3 dir)
     {
-        bullet.transform.position = spawnPos;
+        Transform bullet = GameObject.Find(bulletName).transform;
+        bullet.SetPositionAndRotation(spawnPos, Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
     }
     [PunRPC]
-    void ApplyForce(GameObject bullet, Vector3 dir)
+    void ApplyForce(string bulletName, Vector3 dir)
     {
-        bullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
+        GameObject.Find(bulletName).GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
     }
     IEnumerator Coroutine_Firing(int id)
     {

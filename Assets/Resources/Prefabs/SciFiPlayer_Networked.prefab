@@ -956,7 +956,6 @@ MonoBehaviour:
     m_Bits: 256
   mCanvas: {fileID: 2028064569042939165}
   mCrossHair: {fileID: 2028064569042939166}
-  mBulletPrefab: {fileID: 6484067606254435558, guid: 3c1fca116678e1a42aa530bfab8a826c, type: 3}
   objectPoolBullet: {fileID: 5840627317201339297}
   mBulletSpeed: 10
   RoundsPerSecond: 0a0000000800000002000000
@@ -3095,8 +3094,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7286516850414415255}
   - component: {fileID: 5840627317201339297}
+  - component: {fileID: 5764994434081116757}
   m_Layer: 8
-  m_Name: Magazine
+  m_Name: Pre-initialised bullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3136,6 +3136,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonListBullets: []
   bulletPrefab: {fileID: 6484067606254435558, guid: 3c1fca116678e1a42aa530bfab8a826c, type: 3}
+--- !u!114 &5764994434081116757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893975613923036493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &9000929785580713672
 GameObject:
   m_ObjectHideFlags: 0
@@ -3471,7 +3493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6484067606254435558, guid: 3c1fca116678e1a42aa530bfab8a826c, type: 3}
       propertyPath: m_Name
-      value: BulletMultiplayer
+      value: Bullet_Networked
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

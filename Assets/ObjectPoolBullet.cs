@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,30 +6,48 @@ using UnityEngine;
 
 public class ObjectPoolBullet : MonoBehaviour
 {
-    [HideInInspector] public List<GameObject> photonListBullets = new List<GameObject>();
+    PhotonView photonView;
+
+    [HideInInspector] public List<Transform> photonListBullets = new List<Transform>();
     [SerializeField] private GameObject bulletPrefab;
+    int maxBulletID;
 
     private void Start()
     {
-        photonListBullets = FindObjectsOfType<GameObject>().ToList();
+        photonView = GetComponent<PhotonView>();
+
+        foreach (Transform child in transform)
+        {
+            photonListBullets.Add(child);
+        }
+        maxBulletID = photonListBullets.Count - 1;
+        Debug.Log(maxBulletID + " maxBulletID");
     }
 
     //gets first bullet that is inactive
-    public GameObject GetUnusedBullet()
+    public string GetUnusedBullet()
     {
-        foreach(GameObject bullet in photonListBullets)
+        foreach(Transform bullet in photonListBullets)
         {
             //if bullet is not active (not used), return that bullet object to use
-            if (!bullet.activeSelf)
+            if (!bullet.gameObject.activeSelf)
             {
-                return bullet;
+                return bullet.name;
             }
         }
         //if no bullets available is returned, create a new bullet object to use
-        GameObject newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.parent = gameObject.transform;
-        photonListBullets.Add(newBullet);
+        GameObject newBullet = PhotonNetwork.Instantiate(bulletPrefab.name,Vector3.zero,Quaternion.identity);
+        photonView.RPC("SetParent", RpcTarget.AllBuffered, newBullet.name);
         
-        return newBullet;
+        return newBullet.name;
+    }
+    [PunRPC]
+    void SetParent(string bulletName)
+    {
+        GameObject bullet = GameObject.Find(bulletName);
+        bullet.transform.parent = gameObject.transform;
+        maxBulletID += 1;
+        bullet.name = bulletPrefab.name + " " + maxBulletID;
+        photonListBullets.Add(bullet.transform);
     }
 }

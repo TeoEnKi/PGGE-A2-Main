@@ -223,6 +223,7 @@ public class Player_Multiplayer : MonoBehaviour
         mPhotonView.RPC("ApplyForce", RpcTarget.AllBuffered, applyForceParams);
     }
 
+    //set bullet object to active by finding the object by it's name
     [PunRPC]
     private void EnableBulletVisibility(string bulletName)
     {
@@ -236,17 +237,22 @@ public class Player_Multiplayer : MonoBehaviour
         }
         Debug.LogWarning("missing bullet" + bulletName);
     }
+
+    //update bullet position to the gun's barrel before "shooting"
     [PunRPC]
     void SetToSpawnPos(string bulletName, Vector3 spawnPos, Vector3 dir)
     {
         Transform bullet = GameObject.Find(bulletName).transform;
         bullet.SetPositionAndRotation(spawnPos, Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
     }
+    
+    //when force is applied to the bullet to make it shot out of gun
     [PunRPC]
     void ApplyForce(string bulletName, Vector3 dir)
     {
         GameObject.Find(bulletName).GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
     }
+    
     IEnumerator Coroutine_Firing(int id)
     {
         mFiring[id] = true;

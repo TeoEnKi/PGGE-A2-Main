@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
         //like the original code,
         //ensure that the fire3 btn is prioritised when determining
         //the final update of the values of the array for which mouse button is clicked
+
+        //argument of HandleFireBtnInput changes based on the button that is pressed
         if (Input.GetButton("Fire3"))
         {
             HandleFireBtnInput(FiringState.Fire3);
@@ -80,10 +82,12 @@ public class Player : MonoBehaviour
     //change the values of the attack button array based on the firebutton pressed
     private void HandleFireBtnInput(FiringState firingState)
     {
+        //reset values in mAttackButtons array
         mAttackButtons[0] = false;
         mAttackButtons[1] = false;
         mAttackButtons[2] = false;
 
+        //reaasign a true value to an element in mAttackButtons depending on button pressed
         switch (firingState)
         {
             case FiringState.NoFire:

@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         // We shall apply movement to the game object here.
         if (mAnimator == null) return;
 
-        //move player in circle
+        //roate player
         PlayerRotation();
         //move player left, right,forward,backwards
         PlayerNavigation();
@@ -104,6 +104,8 @@ public class PlayerMovement : MonoBehaviour
         forward.y = 0.0f;
 
         mCharacterController.Move(forward * vInput * speed * Time.deltaTime);
+        
+        //update animation
         mAnimator.SetFloat("PosX", 0);
         mAnimator.SetFloat("PosZ", vInput * speed / (2.0f * mWalkSpeed));
     }

@@ -16,6 +16,7 @@ public class ObjectPoolBullet : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
 
+        //put all the children objects (transform compnent) in a list
         foreach (Transform child in transform)
         {
             photonListBullets.Add(child);
@@ -44,6 +45,7 @@ public class ObjectPoolBullet : MonoBehaviour
     [PunRPC]
     void SetParent(string bulletName)
     {
+        //assign the new bullet as a child of the pre-initialised bullets game objects
         GameObject bullet = GameObject.Find(bulletName);
         bullet.transform.parent = gameObject.transform;
         maxBulletID += 1;

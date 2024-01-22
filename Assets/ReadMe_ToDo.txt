@@ -9,7 +9,7 @@ Refactoring
 
 	may addon. when the bullet is set to active, put it at the back of the list
 
-2. Make the code that handles the fire bullet input cleaner
+2. Make the code (in the Player scipt) that handles the fire bullet input cleaner
 
 3. 
 

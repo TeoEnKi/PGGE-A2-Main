@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using PGGE;
 using UnityEngine;
-using PGGE;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -86,6 +84,32 @@ public class PlayerMovement : MonoBehaviour
 
         // We shall apply movement to the game object here.
         if (mAnimator == null) return;
+
+        //move player in circle
+        PlayerRotation();
+        //move player left, right,forward,backwards
+        PlayerNavigation();
+
+        if (jump)
+        {
+            Jump();
+            jump = false;
+        }
+        ApplyGravity();
+    }
+
+    private void PlayerNavigation()
+    {
+        Vector3 forward = transform.TransformDirection(Vector3.forward).normalized;
+        forward.y = 0.0f;
+
+        mCharacterController.Move(forward * vInput * speed * Time.deltaTime);
+        mAnimator.SetFloat("PosX", 0);
+        mAnimator.SetFloat("PosZ", vInput * speed / (2.0f * mWalkSpeed));
+    }
+
+    private void PlayerRotation()
+    {
         if (mFollowCameraForward)
         {
             // rotate Player towards the camera forward.
@@ -99,20 +123,6 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Rotate(0.0f, hInput * mRotationSpeed * Time.deltaTime, 0.0f);
         }
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward).normalized;
-        forward.y = 0.0f;
-
-        mCharacterController.Move(forward * vInput * speed * Time.deltaTime);
-        mAnimator.SetFloat("PosX", 0);
-        mAnimator.SetFloat("PosZ", vInput * speed / (2.0f * mWalkSpeed));
-
-        if (jump)
-        {
-            Jump();
-            jump = false;
-        }
-        ApplyGravity();
     }
 
     void Jump()
